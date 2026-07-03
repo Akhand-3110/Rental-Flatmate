@@ -1,29 +1,165 @@
-# Rent & Flatmate Finder Platform Backend 🚀
-
-This project implements an AI-powered compatibility engine for linking property listings and room-seeking tenants, featuring fallback structures, real-time message rooms, and email alerts[cite: 1].
-
-## 📋 System Design Highlights
-
-1. **Compatibility Engine & Fallback Architecture:** Calculations run asynchronously during search queries and are stored in the database to prevent duplicate computations[cite: 1]. If an external AI provider fails or tracking tokens are missing, the system automatically redirects traffic into an engineered fallback logic structure[cite: 1].
-2. **Real-Time Encapsulation:** WebSocket channels use a room key structure derived from the expression variables (`listingId_tenantId`)[cite: 1]. Only matched users with an explicit `ACCEPTED` interest status are granted connection paths[cite: 1].
-
-## ⚙️ Quick Start Installation
-
-Ensure you have Python 3.10+ installed. Follow these steps to spin up the local server context layers:
-
-```bash
-# 1. Clone repository structures and direct to directory
-cd rent_flatmate_finder
-
-# 2. Setup your isolated runtime environment sandbox layers
+🏠 Rental & Flatmate Finder Platform
+An AI-powered rental and flatmate matching platform that connects tenants with property owners and compatible roommates. The system combines intelligent compatibility scoring, real-time communication, and automated matching workflows to help users find the most suitable living arrangements.
+✨ Features
+🔍 Smart Compatibility Matching
+AI-powered compatibility scoring between tenants and listings.
+Lifestyle, budget, and preference-based recommendations.
+Ranked search results based on compatibility scores.
+Match scores are stored to avoid redundant calculations and improve performance.
+🛡️ Fallback Matching Engine
+Automatic fallback mechanism when external AI services are unavailable.
+Rule-based compatibility calculation ensures uninterrupted operation.
+Reliable matching experience even during provider outages.
+🏘️ Property Listing Management
+Create, update, and manage rental property listings.
+Upload property details, rent information, amenities, and preferences.
+Search and filter listings based on location, budget, and requirements.
+👤 Tenant Profiles
+Create detailed tenant profiles.
+Store lifestyle preferences, budget range, occupation, and housing requirements.
+Improve recommendation quality through profile data.
+❤️ Interest & Match Workflow
+Tenants can express interest in listings.
+Property owners can accept or reject requests.
+Match status tracking:
+Pending
+Accepted
+Rejected
+💬 Real-Time Messaging
+WebSocket-based real-time communication.
+Dedicated room generation using:
+listingId_tenantId
+Only users with an ACCEPTED match can access chat rooms.
+Secure and isolated conversations.
+📧 Email Notifications
+Automated email alerts for:
+New match requests
+Accepted interests
+Important platform events
+🔐 Authentication & Security
+JWT-based authentication.
+Protected API routes.
+User authorization and access control.
+🏗️ System Architecture
+Compatibility Engine
+User performs a search.
+Compatibility score is calculated asynchronously.
+Results are stored in the database.
+Cached scores prevent duplicate computations.
+Rankings are generated using compatibility scores.
+Fallback Flow
+Search Request
+      │
+      ▼
+AI Compatibility Service
+      │
+      ├── Success
+      │      ▼
+      │  Store Score
+      │
+      └── Failure
+             ▼
+     Fallback Rule Engine
+             ▼
+         Store Score
+Real-Time Messaging Flow
+Accepted Match
+       │
+       ▼
+Create Room Key
+(listingId_tenantId)
+       │
+       ▼
+WebSocket Connection
+       │
+       ▼
+Secure Chat Room
+🛠️ Tech Stack
+Backend
+Python 3.10+
+FastAPI
+SQLAlchemy
+Pydantic
+WebSockets
+Database
+PostgreSQL / SQLite
+Authentication
+JWT Tokens
+AI & Matching
+Compatibility Scoring Engine
+Fallback Recommendation Logic
+Notifications
+SMTP Email Services
+📂 Project Structure
+rental-flatmate-finder/
+│
+├── app/
+│   ├── api/
+│   ├── models/
+│   ├── services/
+│   ├── websocket/
+│   ├── compatibility/
+│   └── main.py
+│
+├── migrations/
+├── requirements.txt
+├── .env.example
+└── README.md
+⚙️ Installation
+1. Clone Repository
+git clone https://github.com/Akhand-3110/Rental-Flatmate.git
+cd Rental-Flatmate
+2. Create Virtual Environment
+Windows
 python -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
-
-# 3. Complete system package dependency tree updates
+venv\Scripts\activate
+Linux / macOS
+python -m venv venv
+source venv/bin/activate
+3. Install Dependencies
 pip install -r requirements.txt
-
-# 4. Initialize environment variables
+4. Configure Environment Variables
 cp .env.example .env
-
-# 5. Boot the live server instance loop lines
+Update the environment variables according to your setup.
+5. Start Development Server
 uvicorn app.main:app --reload --port 8080
+Server will start at:
+http://localhost:8080
+API Documentation:
+http://localhost:8080/docs
+📡 WebSocket Endpoint
+/ws/chat/{listing_id}/{tenant_id}
+Access is granted only when:
+Interest status = ACCEPTED
+User authentication succeeds
+📧 Email Notifications
+The platform sends automated notifications for:
+New interest requests
+Accepted matches
+Compatibility recommendations
+System events
+Configure SMTP credentials in the .env file.
+🚀 Future Enhancements
+Mobile application
+Video calling between matched users
+AI-generated roommate insights
+Fraud detection system
+Property recommendation engine
+Advanced analytics dashboard
+Multi-city support
+🤝 Contributing
+Contributions are welcome.
+Fork the repository
+Create a feature branch
+git checkout -b feature-name
+Commit changes
+git commit -m "Add feature"
+Push branch
+git push origin feature-name
+Open a Pull Request
+📄 License
+This project is licensed under the MIT License.
+👨‍💻 Author
+Akhand Pratap Singh
+B.Tech CSE (Artificial Intelligence)
+Pranveer Singh Institute of Technology (PSIT), Kanpur
